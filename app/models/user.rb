@@ -14,4 +14,6 @@ class User < ActiveRecord::Base
     self.role ||=0 
   end
 
+  ratyrate_rater
+
 end

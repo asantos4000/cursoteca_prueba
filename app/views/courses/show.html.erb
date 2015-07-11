@@ -30,6 +30,8 @@
   <%= @course.commission %>
 </p>
 
+<h5>Rating: <%= rating_for @course, "rating", :disable_after_rate => true %></h5>
+
 <h1> Comments (<%= @comments.count %>)</h1>
 
 <%= render 'comments/form' %>

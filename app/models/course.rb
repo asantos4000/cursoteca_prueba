@@ -6,4 +6,5 @@ class Course < ActiveRecord::Base
 
   paginates_per 20
 
+  ratyrate_rateable "rating"
 end
