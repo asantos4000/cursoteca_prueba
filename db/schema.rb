@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711203638) do
+ActiveRecord::Schema.define(version: 20150711211018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "addresses", ["school_id"], name: "index_addresses_on_school_id", using: :btree
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -56,6 +65,15 @@ ActiveRecord::Schema.define(version: 20150711203638) do
     t.datetime "updated_at"
   end
 
+  create_table "quota", force: :cascade do |t|
+    t.integer  "quota"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "quota", ["course_id"], name: "index_quota_on_course_id", using: :btree
+
   create_table "rates", force: :cascade do |t|
     t.integer  "rater_id"
     t.integer  "rateable_id"
@@ -89,6 +107,16 @@ ActiveRecord::Schema.define(version: 20150711203638) do
 
   add_index "ratings", ["course_id"], name: "index_ratings_on_course_id", using: :btree
 
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rut_school"
+    t.string   "email"
+    t.string   "company_name"
+    t.string   "bank_account"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "user_courses", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "user_id"
@@ -119,7 +147,9 @@ ActiveRecord::Schema.define(version: 20150711203638) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "addresses", "schools"
   add_foreign_key "comments", "courses"
+  add_foreign_key "quota", "courses"
   add_foreign_key "ratings", "courses"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
