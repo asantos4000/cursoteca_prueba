@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <form>
-  <input name="q" <%= @q %> >
+  <input name="query" id="q" <%= @q %> >
   <button type="submit" placeholder="Search here your course"> Search </button>
 </form>
 
@@ -20,23 +20,42 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.name %></td>
-        <td><%= course.description %></td>
-        <td><%= course.category %></td>
-        <td><%= course.price %></td>
-        <td><%= course.photo %></td>
-        <td><%= course.commission %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) if can? :edit, course %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, course %></td>
-      </tr>
-    <% end %>
+  <tbody id='courses'>
+  
+    <%= render partial: "courses/courses", collection: @courses %>
+      
   </tbody>
+
 </table>
 
 <br>
 
 <%= link_to 'New Course', new_course_path %>
+
+<%= paginate @courses %>
+
+<script> 
+
+$(q).on('keyup', function(event) {
+  var query = this.value;
+  console.log("Jquery");
+  $.ajax({
+    url: '<%= courses_path %>',
+    type: 'GET',
+    dataType: 'script',
+    data: {q: query }
+  })
+  .done(function() {
+    console.log("success");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+});
+ 
+
+</script>
+

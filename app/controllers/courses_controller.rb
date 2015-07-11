@@ -13,6 +13,15 @@ class CoursesController < ApplicationController
     else 
       @courses = Course.where("name like ? or description like ?", "%#{@query}%", "%#{@query}%" )
     end 
+    @courses = @courses.page params[:page]
+    p "Busquedas: " + @courses.size.to_s
+
+    respond_to do |f|
+        f.html
+        f.json
+        f.js
+      end
+
   end
 
   # GET /courses/1
