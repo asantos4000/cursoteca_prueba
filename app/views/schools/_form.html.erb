@@ -1,0 +1,38 @@
+<%= form_for(@school) do |f| %>
+  <% if @school.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
+
+      <ul>
+      <% @school.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :rut_school %><br>
+    <%= f.number_field :rut_school %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :company_name %><br>
+    <%= f.text_field :company_name %>
+  </div>
+  <div class="field">
+    <%= f.label :bank_account %><br>
+    <%= f.number_field :bank_account %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

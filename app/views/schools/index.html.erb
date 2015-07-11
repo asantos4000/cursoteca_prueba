@@ -1,0 +1,30 @@
+<%= link_to 'New  School', schools_new_path %>
+
+<form>
+  <input name="query" id="q" <%= @q %> >
+  <button type="submit" placeholder="Search here your course"> Search </button>
+</form>
+
+<h1>Listing Schools</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rut School</th>
+      <th>Email</th>
+      <th>Company Name</th>
+      <th>Bank Account</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id='schools'>
+  
+    <%= render partial: "schools/schools", collection: @schools %>
+      
+  </tbody>
+
+</table>
+
+<br>

@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
+  get 'schools/create'
+
+  get 'schools/new'
+
+  get 'schools/destroy'
+
+  get 'schools/index'
+
+  get 'schools/update'
+
+  get 'schools/show'
+
   post '/rate' => 'rater#create', :as => 'rate'
   get 'comments/create'
 
   devise_for :users
+  resources :schools
   resources :courses do 
     resources :comments, only: [:create]
   end

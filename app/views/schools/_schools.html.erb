@@ -1,0 +1,11 @@
+<% @schools.each do |school| %>
+    <tr>
+        <td><%= school.name %></td>
+        <td><%= school.rut_school %></td>
+        <td><%= school.email %></td>
+        <td><%= school.company_name %></td>
+        <td><%= school.bank_account %></td>
+        <td><%= link_to 'Edit', schools_edith_path(school) %></td>
+        <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+<% end %>
