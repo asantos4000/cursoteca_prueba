@@ -27,6 +27,8 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @comment = @course.comments.build
+    @comments = Comment.all
   end
 
   # GET /courses/new

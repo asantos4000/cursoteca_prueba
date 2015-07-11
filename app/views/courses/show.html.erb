@@ -30,5 +30,13 @@
   <%= @course.commission %>
 </p>
 
+<h1> Comments (<%= @comments.count %>)</h1>
+
+<%= render 'comments/form' %>
+
+<%= render partial: "comments/comment", collection: @comments %>
+
+
+
 <%= link_to 'Edit', edit_course_path(@course) if can? :edit, current_user %> |
 <%= link_to 'Back', courses_path  %>

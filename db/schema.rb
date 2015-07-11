@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711165825) do
+ActiveRecord::Schema.define(version: 20150711194222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "comment"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["course_id"], name: "index_comments_on_course_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +35,8 @@ ActiveRecord::Schema.define(version: 20150711165825) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "user_courses", force: :cascade do |t|
@@ -58,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150711165825) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "courses"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
 end
