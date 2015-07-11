@@ -10,7 +10,7 @@ class Ability
       elsif user.school?
         can :read, :all
         can :create, [Course]
-        can :[:update, :destroy] , [Course], user_id: user.id
+        can [:update, :destroy] , [Course], user_id: user.id
       else
         can :read, :all
         can :buy, :all
