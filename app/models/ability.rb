@@ -5,12 +5,14 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
       user ||= User.new(role:0) # guest user (not logged in)
-      if user.admin?
-        can :manage, :all
-      elsif user.school?
+
+      if user.school?
         can :read, :all
         can :create, [Course]
-        can [:update, :destroy] , [Course], user_id: user.id
+        can [:update, :destroy, :edit], [Course], user_id: user.id
+        
+      elsif user.admin?
+        can :manage, :all
       else
         can :read, :all
         can :buy, :all

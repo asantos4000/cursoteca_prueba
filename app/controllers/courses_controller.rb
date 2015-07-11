@@ -7,6 +7,12 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
+    @query = params[:q]
+    if @query.nil?
+      @courses = Course.all
+    else 
+      @courses = Course.where("name like ? or description like ?", "%#{@query}%", "%#{@query}%" )
+    end 
   end
 
   # GET /courses/1
@@ -27,6 +33,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
+    @course.user = current_user
 
     respond_to do |format|
       if @course.save
