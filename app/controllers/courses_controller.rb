@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :auntheticate_user!, except: [:index, :show]
+  load_and_authorize_resource
 
   # GET /courses
   # GET /courses.json
