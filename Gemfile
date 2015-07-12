@@ -10,6 +10,8 @@ gem 'letsrate'
 
 gem 'ratyrate'
 
+gem 'friendly_id', '~> 5.1.0'
+
 gem 'faker', require: false
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
